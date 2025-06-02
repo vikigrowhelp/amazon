@@ -364,6 +364,98 @@ header {
   display: block;
 }
 
+.review-input-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      flex-wrap: wrap;
+    }
+
+    .review-input-box i {
+      font-size: 24px;
+      color: #555;
+    }
+
+    .review-input-box textarea {
+      flex: 2;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      resize: none;
+      min-height: 50px;
+    }
+
+    .review-input-box input[type="file"] {
+      flex: 1;
+    }
+
+    .review-input-box select {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .review-input-box button {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .review-input-box button:hover {
+      background: #218838;
+    }
+
+    .warning-popup {
+      display: none;
+      position: fixed;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      background: white;
+      border: 2px solid red;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .warning-popup img {
+      width: 150px;
+      margin-bottom: 10px;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 998;
+    }
+
+    @media (max-width: 600px) {
+      .review-input-box {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .review-input-box textarea,
+      .review-input-box input,
+      .review-input-box select,
+      .review-input-box button {
+        width: 100%;
+      }
+    }
+
 
     
   </style>
@@ -775,6 +867,45 @@ header {
 }
 
     </script>
+
+
+<div class="review-input-box">
+    <i class="fa-regular fa-user"></i>
+    <textarea placeholder="Write your review..."></textarea>
+    <input type="file" multiple>
+    <select>
+      <option value="">Rating</option>
+      <option value="1">⭐</option>
+      <option value="2">⭐⭐</option>
+      <option value="3">⭐⭐⭐</option>
+      <option value="4">⭐⭐⭐⭐</option>
+      <option value="5">⭐⭐⭐⭐⭐</option>
+    </select>
+    <button onclick="checkPurchase()">Send</button>
+  </div>
+
+  <!-- Warning Modal -->
+  <div class="overlay" id="overlay" onclick="closePopup()"></div>
+  <div class="warning-popup" id="warningPopup">
+    <img src="https://cdn-icons-png.flaticon.com/512/564/564619.png" alt="Warning">
+    <h3>Pehle aap mobile kharidein</h3>
+    <p>Uske baad hi review de sakte hain.</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+
+  <script>
+    function checkPurchase() {
+      // Yahan pe aap real purchase check laga sakte ho backend se
+      // Abhi ke liye sabhi users fake maan ke popup dikhate hain
+      document.getElementById("overlay").style.display = "block";
+      document.getElementById("warningPopup").style.display = "block";
+    }
+
+    function closePopup() {
+      document.getElementById("overlay").style.display = "none";
+      document.getElementById("warningPopup").style.display = "none";
+    }
+  </script>
 
 </body>
 </html>
